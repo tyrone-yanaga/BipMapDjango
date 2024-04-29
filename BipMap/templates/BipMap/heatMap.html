@@ -38,6 +38,17 @@
 
         function getPoints() {
             var heatMapData = [];
+            // Fetch sf crime data from API
+            fetch('https://data.sfgov.org/resource/wg3w-h783.json')
+                .then(response => response.json())
+                .then(data => {
+                    // Filter out non auto break-ins and extract lat/lon
+                    data.forEach(entry => {
+                        if(true) {
+                            heatMapData.unshift(new google.maps.LatLng(entry.latitude, entry.longitude));
+                        }
+                    });
+                })
             // Fetch crime data from your API
             fetch('https://data.oaklandca.gov/resource/ym6k-rx7a.json')
                 .then(response => response.json())
