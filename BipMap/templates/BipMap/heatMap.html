@@ -49,6 +49,9 @@
                         }
                     });
                 })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                });
             // Fetch crime data from your API
             fetch('https://data.oaklandca.gov/resource/ym6k-rx7a.json')
                 .then(response => response.json())
@@ -60,7 +63,7 @@
                     });
                 })
                 .catch(error => {
-                    console.error('Error fetching data:', error);
+                    console.error('Error fetching Oakland data:', error);
                 });
             console.log('heatMapData: ', heatMapData)
             return heatMapData;
