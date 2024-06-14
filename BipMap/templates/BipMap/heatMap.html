@@ -61,7 +61,6 @@
                 sfData.forEach(entry => {
                     if (entry.latitude && entry.longitude) {
                         heatMapData.unshift(new google.maps.LatLng(entry.latitude, entry.longitude));
-                        console.log('good entry', entry);
                     } else {
                         console.warn('Missing coordinates in SF data entry:', entry);
                     }
