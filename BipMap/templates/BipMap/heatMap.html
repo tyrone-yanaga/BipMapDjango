@@ -107,7 +107,7 @@ function changeOpacity() {
             let heatMapData = [];
             try {
                 // Fetch SF crime data from API
-                const sfResponse = await fetch('https://data.sfgov.org/resource/wg3w-h783.json');
+                const sfResponse = await fetch('https://data.sfgov.org/resource/wg3w-h783.json?$limit=50000');
                 if (!sfResponse.ok) throw new Error(`SF API error: ${sfResponse.statusText}`);
                 const sfData = await sfResponse.json();
                 // extract lat/lon
@@ -120,7 +120,7 @@ function changeOpacity() {
                 });
     
                 // Fetch crime data from oakland API
-                const oaklandResponse = await fetch('https://data.oaklandca.gov/resource/ym6k-rx7a.json');
+                const oaklandResponse = await fetch('https://data.oaklandca.gov/resource/ym6k-rx7a.json?$limit=50000');
                 if (!oaklandResponse.ok) throw new Error(`Oakland API error: ${oaklandResponse.statusText}`);
                 const oaklandData = await oaklandResponse.json();
                 // Process the fetched data

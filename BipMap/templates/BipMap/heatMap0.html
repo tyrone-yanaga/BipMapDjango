@@ -41,7 +41,7 @@
         function getPoints() {
             var heatMapData = [];
             // Fetch sf crime data from API
-            fetch('https://data.sfgov.org/resource/wg3w-h783.json')
+            fetch('https://data.sfgov.org/resource/wg3w-h783.json?$limit=50000')
                 .then(response => response.json())
                 .then(data => {
                     // Filter out non auto break-ins and extract lat/lon
@@ -57,13 +57,17 @@
                     console.error('Error fetching data:', error);
                 });
             // Fetch crime data from your API
-            fetch('https://data.oaklandca.gov/resource/ym6k-rx7a.json')
+            fetch('https://data.oaklandca.gov/resource/ym6k-rx7a.json?$limit=50000')
                 .then(response => response.json())
                 .then(data => {
                     // Process the fetched data and add heat map layer
                     data.forEach(entry => {
-                        const coordinates = entry.location_1.coordinates
+                        if (entry.location_1 && entry.location_1.coordinates) {
+                        const coordinates = entry.location_1.coordinates;
                         heatMapData.unshift(new google.maps.LatLng(coordinates[1], coordinates[0]));
+                    } else {
+                        console.warn('Missing coordinates in Oakland data entry:', entry);
+                    }
                     });
                 })
                 .catch(error => {
